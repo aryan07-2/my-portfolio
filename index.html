@@ -344,20 +344,20 @@
           </div>
         </div>
       </div>
-      <form class="contact-form reveal reveal-delay-1" id="contactForm">
+      <form class="contact-form reveal reveal-delay-1" id="contactForm" action="https://formspree.io/f/mjgaoypz" method="POST">
         <div class="form-row">
           <div class="form-group">
-            <input type="text" placeholder="Your Name" required id="input-name"/>
+            <input type="text" placeholder="Your Name" required id="input-name" name="name"/>
           </div>
           <div class="form-group">
-            <input type="email" placeholder="Your Email" required id="input-email"/>
+            <input type="email" placeholder="Your Email" required id="input-email" name="email"/>
           </div>
         </div>
         <div class="form-group">
-          <input type="text" placeholder="Subject" id="input-subject"/>
+          <input type="text" placeholder="Subject" id="input-subject" name="subject"/>
         </div>
         <div class="form-group">
-          <textarea placeholder="Your Message..." required id="input-message"></textarea>
+          <textarea placeholder="Your Message..." required id="input-message" name="message"></textarea>
         </div>
         <button type="submit" class="btn btn-primary btn-submit" id="btn-send">🚀 Send Message</button>
       </form>

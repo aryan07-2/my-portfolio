@@ -123,18 +123,38 @@ skillBars.forEach((bar) => skillObserver.observe(bar));
 
 // ============ CONTACT FORM ============
 const contactForm = document.getElementById('contactForm');
-contactForm.addEventListener('submit', (e) => {
+contactForm.addEventListener('submit', async (e) => {
   e.preventDefault();
 
-  // Show toast
-  const toast = document.getElementById('toast');
-  toast.classList.add('show');
+  const btn = document.getElementById('btn-send');
+  btn.textContent = '⏳ Sending...';
+  btn.disabled = true;
 
-  setTimeout(() => {
-    toast.classList.remove('show');
-  }, 3000);
+  try {
+    const response = await fetch(contactForm.action, {
+      method: 'POST',
+      body: new FormData(contactForm),
+      headers: { 'Accept': 'application/json' }
+    });
 
-  contactForm.reset();
+    const toast = document.getElementById('toast');
+    if (response.ok) {
+      toast.textContent = '✅ Message sent successfully!';
+      contactForm.reset();
+    } else {
+      toast.textContent = '❌ Something went wrong. Try again!';
+    }
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 3000);
+  } catch (error) {
+    const toast = document.getElementById('toast');
+    toast.textContent = '❌ Network error. Try again!';
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 3000);
+  }
+
+  btn.textContent = '🚀 Send Message';
+  btn.disabled = false;
 });
 
 // ============ PARTICLE BACKGROUND ============
